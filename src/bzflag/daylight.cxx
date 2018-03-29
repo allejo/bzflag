@@ -282,7 +282,7 @@ void			getSkyColor(const float sunDir[3], GLfloat sky[4][3])
   static const GLfloat	sunrise2Color[3] = { 0.47f, 0.12f, 0.08f };
 
   // sky colors
-  if (sunDir[2] < nightElevation) {
+  if (BZDB.get("timeOfDay") == "2" || sunDir[2] < nightElevation) {
     // nighttime
     sky[0][0] = nightColor[0];
     sky[0][1] = nightColor[1];
@@ -378,7 +378,7 @@ bool			areShadowsCast(const float sunDir[3])
 
 bool			areStarsVisible(const float sunDir[3])
 {
-  return sunDir[2] < dawnElevation;
+  return BZDB.get("timeOfDay") == "2" || sunDir[2] < dawnElevation;
 }
 
 // Local Variables: ***

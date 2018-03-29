@@ -80,6 +80,7 @@ DefaultDBItem defaultDBItems[] = {
   { "allowInputChange",		"1",			true,	StateDatabase::ReadWrite,	NULL },
   { "pulseDepth",		"0.4",			true,	StateDatabase::ReadWrite,	NULL },
   { "pulseRate",		"1.0",			true,	StateDatabase::ReadWrite,	NULL },
+  { "timeOfDay",		"0",			true,	StateDatabase::ReadWrite,	NULL },
   { "userRainScale",		"1.0",			true,	StateDatabase::ReadWrite,	NULL },
   { "userMirror",		"1",			true,	StateDatabase::ReadWrite,	NULL },
   { "showTreads",		"0",			true,	StateDatabase::ReadWrite,	NULL },

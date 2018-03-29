@@ -44,6 +44,19 @@ EffectsMenu::EffectsMenu()
   HUDuiList* option;
   std::vector<std::string>* options;
 
+  // Sky Color
+  option = new HUDuiList;
+  option->setFontFace(MainMenu::getFontFace());
+  option->setLabel("Time of Day:");
+  option->setCallback(callback, "k");
+  options = &option->getList();
+  options->push_back("Natural");
+  options->push_back("Always Day");
+  options->push_back("Always Night");
+  options->push_back("Always Evening");
+  option->update();
+  listHUD.push_back(option);
+
   // Rain Scale
   option = new HUDuiList;
   option->setFontFace(MainMenu::getFontFace());
@@ -319,6 +332,7 @@ void EffectsMenu::resize(int _width, int _height)
 
   // load current settings
   i = 1;
+  ((HUDuiList*)listHUD[i++])->setIndex(BZDB.evalInt("timeOfDay"));
   ((HUDuiList*)listHUD[i++])->setIndex(int((BZDB.eval("userRainScale")
 					    * 10.0f) + 0.5f));
   ((HUDuiList*)listHUD[i++])->setIndex(BZDB.isTrue("userMirror") ? 1 : 0);
@@ -363,6 +377,10 @@ void EffectsMenu::callback(HUDuiControl* w, const void* data)
   HUDuiList* list = (HUDuiList*)w;
 
   switch (((const char*)data)[0]) {
+    case 'k': {
+      BZDB.setInt("timeOfDay", list->getIndex());
+      break;
+    }
     case 'r': {
       int scale = list->getIndex();
       BZDB.setFloat("userRainScale", float(scale) / 10.0f);
